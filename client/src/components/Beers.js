@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Grid } from 'semantic-ui-react';
-import { Card} from 'semantic-ui-react';
+import { Grid, Card, Divider } from 'semantic-ui-react';
 import axios from 'axios'
+import { isNullOrUndefined } from 'util';
 
 class Beers extends React.Component {
     
@@ -16,23 +16,38 @@ class Beers extends React.Component {
       })
   }
 
-  render() { 
+  editText = (text) => {
+    if(typeof(text) === 'undefined') {
+      return "Sorry, no text available"
+    }
+
+    if(text.length > 25) {
+      return text.substring(0,24) + "...";
+    } else
+      return text
+  }
+
+  render() {
+
     return (
-      <Grid>
-        <Grid.Row>
-          <Grid.Column mobile={16} tablet={16} computer={4} >
-            <Card>
-              { this.state.beers.length > 0 ? this.state.beers.map( beer =>
-                  <Card.Content key={beer.id}>
-                    <Card.Header>{beer.name}</Card.Header>
-                    <Card.Description>{beer.description}</Card.Description>
-                  </Card.Content>
-                )
-                :
-                <div>Loading...</div>
-              }
-            </Card> 
-          </Grid.Column>
+      <Grid centered>
+        <Grid.Row>    
+        { this.state.beers.length > 0 ? this.state.beers.map( beer =>
+          <div>
+            <Grid.Column mobile={16} tablet={16} computer={4}>
+              <Card>
+                <Card.Content key={beer.id}>
+                  <Card.Header>{beer.name && this.editText(beer.name)}</Card.Header>
+                  <Card.Description>{this.editText(beer.description)}</Card.Description>
+                </Card.Content>
+              </Card> 
+            </Grid.Column>
+            <Divider />
+          </div>
+          )
+          :
+          <div>Loading...</div>
+        }
         </Grid.Row>
       </Grid>
     )
