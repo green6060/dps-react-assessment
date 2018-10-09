@@ -3,7 +3,7 @@ import NoMatch from './NoMatch';
 import NavBar from './NavBar';
 import Flash from './Flash';
 import Beers from './Beers';
-// import Breweries from './Breweries';
+import Breweries from './Breweries';
 import Home from './Home';
 
 import { Switch, Route } from 'react-router-dom';
@@ -20,8 +20,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/Beers' component={Beers} />
-         
-          {/* <Route exact path='/Breweries' component={Breweries} /> */}
+          <Route exact path='/Breweries' component={Breweries} />
           <Route component={NoMatch} />
         </Switch>
       </Segment>

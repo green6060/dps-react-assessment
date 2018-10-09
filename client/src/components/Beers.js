@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Card, Divider } from 'semantic-ui-react';
 import axios from 'axios'
-import { isNullOrUndefined } from 'util';
 
 class Beers extends React.Component {
     
