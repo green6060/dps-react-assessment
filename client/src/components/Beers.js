@@ -5,7 +5,7 @@ import { isNullOrUndefined } from 'util';
 
 class Beers extends React.Component {
     
-  state = { beers: []}
+  state = { beers: [] }
 
   componentDidMount() {
     axios.get('/api/all_beers')
@@ -41,6 +41,15 @@ class Beers extends React.Component {
                   <Card.Description>{this.editText(beer.description)}</Card.Description>
                 </Card.Content>
               </Card> 
+              {/* 
+              ternary checking showMore state
+                IF state "showMore" === true
+                  display full description text
+                  button changing displayed info 
+                ELSE
+                  display sub string text
+                  button changing displayed info 
+              */}
             </Grid.Column>
             <Divider />
           </div>
