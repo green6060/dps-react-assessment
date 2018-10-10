@@ -4,12 +4,12 @@ import axios from 'axios'
 
 class BeerCard extends React.Component {
 
-  state = { beers: [], showMore: false }
+  state = { breweries: [], showMore: false }
 
   componentDidMount() {
-    axios.get('/api/all_beers')
+    axios.get('/api/all_breweries')
       .then(res => {
-        this.setState({ beers: res.data.entries })
+        this.setState({ breweries: res.data.entries })
         this.forceUpdate()
       })
   }
@@ -28,15 +28,15 @@ class BeerCard extends React.Component {
   handleClick = () => this.setState({ showMore: !this.state.showMore })
 
   render() {
-    const { beer } = this.props
+    const { brewery } = this.props
     return( 
-      <div>   
+      <div>
         <Grid.Column mobile={16} tablet={16} computer={4}>
           <Card>
-            <Image src={beer.labels ? beer.labels.medium : "https://via.placeholder.com/255x255"} />
-            <Card.Content key={beer.id}>
-              <Card.Header>{beer.name && this.editText(beer.name)}</Card.Header>
-              <Card.Description>{this.state.showMore === false ? this.editText(beer.description) : beer.description}</Card.Description>
+            <Image src={brewery.images ? brewery.images.medium : "https://via.placeholder.com/350x100"} />
+            <Card.Content key={brewery.id}>
+              <Card.Header>{brewery.name && this.editText(brewery.name)}</Card.Header>
+              <Card.Description>{this.state.showMore === false ? this.editText(brewery.description) : brewery.description}</Card.Description>
             </Card.Content>
             <Card.Content extra>
               <a>

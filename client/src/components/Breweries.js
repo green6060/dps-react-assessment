@@ -1,10 +1,12 @@
+
 import React, { Component } from 'react'
-import { Grid, Card, Divider, Image} from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import axios from 'axios'
+import BreweryCard from './BreweryCard';
 
 class Breweries extends React.Component {
     
-  state = { breweries: []}
+  state = { breweries: [], showMore: false }
 
   componentDidMount() {
     axios.get('/api/all_breweries')
@@ -26,42 +28,30 @@ class Breweries extends React.Component {
       return text
   }
 
-  render() {
+  handleClick = () => this.setState({ showMore: !this.state.showMore })
 
-    return (
+  mapBreweries = () => {
+    return(
       <Grid centered>
-        <Grid.Row>    
-        { this.state.breweries.length > 0 ? this.state.breweries.map( brewery =>
-          <div>
-            <Grid.Column mobile={16} tablet={16} computer={4}>
-              <Card>
-                <Image src={brewery.images ? brewery.images.medium : "https://via.placeholder.com/350x100"} />
-                <Card.Content key={brewery.id}>
-                  <Card.Header>{brewery.name && this.editText(brewery.name)}</Card.Header>
-                  <Card.Description>{this.editText(brewery.description)}</Card.Description>
-                  
-                </Card.Content>
-              </Card>
-              {/* 
-              ternary checking showMore state
-                IF state "showMore" === true
-                  display full description text
-                  button changing displayed info 
-                ELSE
-                  display sub string text
-                  button changing displayed info 
-              */}
-            </Grid.Column>
-            <Divider />
-          </div>
-          )
-          :
+        <Grid.Row>
+        { 
+          this.state.breweries.length > 0 ? this.state.breweries.map( brewery => 
+            <BreweryCard brewery={brewery} />
+          ) 
+          : 
           <div>Loading...</div>
         }
         </Grid.Row>
       </Grid>
     )
   }
+
+  render() {
+    return ( 
+      this.mapBreweries()
+    )
+  }
+
 }
 
 export default Breweries;
