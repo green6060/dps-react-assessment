@@ -4,16 +4,16 @@ import axios from 'axios'
 
 class Breweries extends React.Component {
     
-  state = { breweries: [] }
+  state = { breweries: []}
 
   componentDidMount() {
     axios.get('/api/all_breweries')
       .then(res => {
-        console.log(res)
         this.setState({ breweries: res.data.entries })
         this.forceUpdate()
-      })
-  }
+        }
+      )
+    }
 
   editText = (text) => {
     if(typeof(text) === 'undefined') {
@@ -39,8 +39,9 @@ class Breweries extends React.Component {
                 <Card.Content key={brewery.id}>
                   <Card.Header>{brewery.name && this.editText(brewery.name)}</Card.Header>
                   <Card.Description>{this.editText(brewery.description)}</Card.Description>
+                  
                 </Card.Content>
-              </Card> 
+              </Card>
               {/* 
               ternary checking showMore state
                 IF state "showMore" === true

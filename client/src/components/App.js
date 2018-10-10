@@ -9,7 +9,6 @@ import Home from './Home';
 import { Switch, Route } from 'react-router-dom';
 import { Segment } from 'semantic-ui-react';
 
-
 class App extends Component {
 
   render() {
