@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid, Card, Divider, Image, Button } from 'semantic-ui-react';
 import axios from 'axios'
 
+
 class BeerCard extends React.Component {
 
   state = { beers: [], showMore: false }
